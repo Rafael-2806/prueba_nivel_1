@@ -1,69 +1,71 @@
+
+#EJERCICIO PRUEBA DE NIVEL 
+
 class Vehiculo:
     def __init__(self, color, ruedas):
         self.color = color
         self.ruedas = ruedas
 
-    def mostrar_informacion(self):
-        print(f"Clase: {self.__class__.__name__}\nColor: {self.color}\nRuedas: {self.ruedas}")
+    def __str__(self):
+        return "Vehículo - Color: {}, Ruedas: {}".format(self.color, self.ruedas)
+#Vehículo es la clase súper 
 
-
+#La clase Coche hereda de la clase Vehículo.
 class Coche(Vehiculo):
     def __init__(self, color, ruedas, velocidad, cilindrada):
         super().__init__(color, ruedas)
         self.velocidad = velocidad
         self.cilindrada = cilindrada
 
-    def mostrar_informacion(self):
-        super().mostrar_informacion()
-        print(f"Velocidad: {self.velocidad}\nCilindrada: {self.cilindrada}")
+    def __str__(self):
+        return "Coche - Color: {}, Ruedas: {}, Velocidad: {} km/h, Cilindrada: {}cc".format(self.color, self.ruedas, self.velocidad, self.cilindrada)
 
-
-class Camioneta(Coche):
+#Camión hereda de la clase Coche
+class Camion(Coche):
     def __init__(self, color, ruedas, velocidad, cilindrada, carga):
         super().__init__(color, ruedas, velocidad, cilindrada)
         self.carga = carga
 
-    def mostrar_informacion(self):
-        super().mostrar_informacion()
-        print(f"Carga: {self.carga}")
+    def __str__(self):
+        return "Camión - Color: {}, Ruedas: {}, Velocidad: {} km/h, Cilindrada: {}cc, Carga: {} kg".format(self.color, self.ruedas, self.velocidad, self.cilindrada, self.carga)
 
-
+#Bicicleta hereda de la clase Vehículo
 class Bicicleta(Vehiculo):
     def __init__(self, color, ruedas, tipo):
-        super().__init(color, ruedas)
+        super().__init__(color, ruedas)
         self.tipo = tipo
 
-    def mostrar_informacion(self):
-        super().mostrar_informacion()
-        print(f"Tipo: {self.tipo}")
+    def __str__(self):
+        return "Bicicleta - Color: {}, Ruedas: {}, Tipo: {} ".format(self.color, self.ruedas, self.tipo)
 
-
+#Motocicleta hereda de la clase Bicicleta 
 class Motocicleta(Bicicleta):
     def __init__(self, color, ruedas, tipo, velocidad, cilindrada):
-        super().__init(color, ruedas, tipo)
+        super().__init__(color, ruedas, tipo)
         self.velocidad = velocidad
         self.cilindrada = cilindrada
 
-    def mostrar_informacion(self):
-        super().mostrar_informacion()
-        print(f"Velocidad: {self.velocidad}\nCilindrada: {self.cilindrada}")
+    def __str__(self):
+        return "Motocicleta - Color: {}, Ruedas: {}, Tipo: {} , Velocidad: {} km/h, Cilindrada: {}cc".format(self.color, self.ruedas, self.tipo, self.velocidad, self.cilindrada)
+
+#Una vez creadas las clases y subclases realizamos las preguntas propuestas por el profesor:
+#Creamos objetos de las subclases: (PREFUNTA 1)
+coche = Coche("Negro", 4, 170, 2000)
+coche1 = Coche("Azul", 4, 200, 1500)
+camion = Camion("Azul", 6, 120, 6000, 10000)
+bicicleta = Bicicleta("Rosa", 2, "Urbana")
+bicicleta1 = Bicicleta("Dorado", 2, "Deportiva")
+motocicleta = Motocicleta("Negra", 2, "Deportiva", 100, 1000)
 
 
-# Crear objetos de cada subclase
-vehiculo_generico = Vehiculo("Rojo", 4)
-coche = Coche("Azul", 4, "120 km/h", "2000 cc")
-camioneta = Camioneta("Blanco", 4, "100 km/h", "2500 cc", "500 kg")
-bicicleta = Bicicleta("Verde", 2, "Montaña")
-motocicleta = Motocicleta("Negro", 2, "Deportiva", "180 km/h", "1000 cc")
+# Agregamos los objetos a la lista "vehiculos"
+vehiculos = [coche, coche1, camion, bicicleta, bicicleta1, motocicleta]
 
-# Agregar los objetos a una lista
-lista_vehiculos = [vehiculo_generico, coche, camioneta, bicicleta, motocicleta]
-
-# Definir la función catalogar
-def catalogar(lista):
-    for vehiculo in lista:
-        vehiculo.mostrar_informacion()
-        print("\n")
-
-# Llamar a la función catalogar para mostrar la información de los vehículos
-catalogar(lista_vehiculos)
+def catalogar(lista, ruedas):
+    for i in vehiculos:
+        if i.ruedas==ruedas:
+            print(i.__class__.__name__, i.__str__())
+        else:
+            pass
+        
+print(catalogar(vehiculos,4))
